@@ -1,20 +1,12 @@
 /*
+ * A simple console calculator.
+ *
  * Calculator.cpp
  *
  *  Created on: 26 Aug 2015
- *      Author: Jason
+ *      Author: Jason Andrews
  */
 
-/*
- * DESIGN DOCUMENT
- *
- * 1) Get first value.
- * 2) Get operation.
- * 3) Get second value.
- * 4) Calculate result.
- * 5) Print result.
- *
- */
 
 #include <string>
 #include <cstdlib>
@@ -22,7 +14,7 @@
 
 namespace calculator {
 
-	//Check if the user's input is numeric.
+	//Check if the user's input is valid (numeric or contains specific special characters.)
 	bool isNumeric(std::string valueStr) {
 		bool isNumeric = true;
 		char ch = ' ';
@@ -47,6 +39,7 @@ namespace calculator {
 		char operation = ' ';
 		std::string operationStr;
 
+		//A do-while loop to get the user's input. If their inputed value was invalid, ask them again.
 		do {
 			//Ask the user what operation they want to do.
 			std::cout << "Please enter the operation you wish to do (+, -, *, /): " << std::endl;
@@ -65,22 +58,28 @@ namespace calculator {
 		return operation;
 	}
 
-	//Wait for the user to enter the next value and return it.
+	//Wait for the user to enter the next value, validate it and then return it.
 	double getNextInput() {
 
 		double value = 0.0;
 		std::string valueStr;
 		bool validInput = true;
 
+		//A do-while loop to get the user's input for the operation they want to do. If their input value was invalid, ask them again.
 		do {
+			//Prompt the user for a value.
 			std::cout << "\nPlease enter a value: " << std::endl;
+			//Store the user's input in a string.
 			std::cin >> valueStr;
 
+			//See whether or not the input was valid.
 			validInput = isNumeric(valueStr);
 
-			value = std::strtod(valueStr.c_str(), NULL);
-
-			if(!validInput) {
+			if(validInput) {
+				//The user entered in a numeric number.
+				value = std::strtod(valueStr.c_str(), NULL);
+			} else {
+				//They entered an incorrect value (it contained invalid special characters or letters.)
 				std::cout << "Please select a numeric value!" << std::endl;
 			}
 
@@ -109,11 +108,16 @@ int main() {
 	double value2 = 0;
 	double result = 0;
 	char operation = ' ';
+	bool printResult = true;
 
+	//Get the first value.
 	value1 = calculator::getNextInput();
+	//Get the operation character.
 	operation = calculator::getOperator();
+	//Get the second value.
 	value2 = calculator::getNextInput();
 
+	//Switch between the input operation character and do a calculation based on that character.
 	switch(operation) {
 		case '+' : {
 			result = calculator::add(value1, value2);
@@ -130,6 +134,7 @@ int main() {
 		case '/' : {
 			if(value2 == 0.0) {
 				std::cout << "Cannot divide by zero. Terminating program." << std::endl;
+				printResult = false;
 			} else {
 				result = calculator::divide(value1, value2);
 			}
@@ -137,11 +142,14 @@ int main() {
 		}
 		default: {
 			std::cout << "An invalid operator has been used. Terminating program." << std::endl;
+			printResult = false;
 			break;
 		}
 	}
 
-	std::cout << "Result of " << value1 << " " << operation << " " << value2 << " is " << result << std::endl;
+	//Only print the result if no errors occurred.
+	if(printResult)
+		std::cout << "Result of " << value1 << " " << operation << " " << value2 << " is " << result << std::endl;
 
 	return 0;
 }
