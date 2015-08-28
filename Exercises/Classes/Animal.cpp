@@ -1,21 +1,19 @@
 /*
- * A simple example of the use of classes in C++.
- *
  * Animal.cpp
  *
  *  Created on: 27 Aug 2015
- *      Author: Jason
+ *      Author: Jason Andrews
  */
 
 #include <string>
 #include <iostream>
-#include "Animal.hpp";
+#include "Animal.hpp"
 
 //No arguments constructor.
 Animal::Animal(){
-	this -> name = "Spotty";
-	this -> age = 5;
-	this -> sound = "Woof";
+	this -> name = "Animal";
+	this -> age = 0;
+	this -> sound = "None";
 }
 
 //Constructor that takes in the name, sound and age of the animal.

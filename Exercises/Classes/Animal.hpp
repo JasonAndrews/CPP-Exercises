@@ -2,7 +2,7 @@
  * Animal.hpp
  *
  *  Created on: 27 Aug 2015
- *      Author: Jason
+ *      Author: Jason Andrews
  */
 
 #ifndef ANIMAL_HPP_
