@@ -1,4 +1,6 @@
 /*
+ * A parent class.
+ *
  * Vehicle.hpp
  *
  *  Created on: 29 Aug 2015
@@ -15,17 +17,18 @@ class Vehicle {
 private:
 	std::string make;
 	std::string model;
-	double fuel = 0.0;
+	double fuel;
 
 public:
 	Vehicle();
 	Vehicle(std::string make, std::string model, double fuel);
-	~Vehicle();
+	virtual ~Vehicle();
 
 	std::string getMake();
 	std::string getModel();
 	double getFuel();
 
+	virtual void printInfo();
 };
 
 
