@@ -13,3 +13,6 @@ A program to demonstrate the use of classes (Object Oriented Programming) in C++
 A program to demonstrate the use of parent & derived (child) classes within C++.
 Also shows an example of polymorphism (using pointers.)
 
+### SFMLTest
+This exercise was testing the use of SFML.
+
